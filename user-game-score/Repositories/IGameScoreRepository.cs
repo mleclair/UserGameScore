@@ -16,7 +16,7 @@ namespace GameScore.Repositories
 		/// </summary>
 		/// <param name="userGameScore"></param>
 		/// <returns>True when create successful.</returns>
-		bool CreateUserGameScore(UserGameScoreRecord userGameScore);
+		bool CreateUserGameScore(int userId, string gameName);
 
 		/// <summary>
 		/// Updates and existing <see cref="UserGameScoreRecord"/>.

@@ -37,30 +37,34 @@ using var scope = app.Services.CreateScope();
 _gameScoreRepository = scope.ServiceProvider.GetRequiredService<IGameScoreRepository>();
 
 app.MapGet("/usergamescores/{userId}",
-	[SwaggerOperation(Summary = "Gets user game scores", Description = "Gets the latest score all games of the provided user.")]
+	[SwaggerOperation(Summary = "Gets user game scores", Description = "Gets the latest score for all games of the provided user.")]
 	(int userId) => {
-	return _gameScoreRepository.GetUserGameScores(userId);
+		// TODO: Add validation
+		return _gameScoreRepository.GetUserGameScores(userId);
 })
 .WithName("GetUserGameScores");
 
-app.MapPost("/usergamescore/{userId}",
-	[SwaggerOperation(Summary = "Creates new user game", Description = "Creates the initial score for the provided user and game.")]
-	(int userId) => {
-	return _gameScoreRepository.CreateUserGameScore(new UserGameScoreRecord(userId, games[1], 1, 0));
+app.MapPost("/usergamescore/{userId}/{gameName}",
+	[SwaggerOperation(Summary = "Creates new user game", Description = "Creates the initial game for the provided user and game.")]
+	(int userId, string gameName) => {
+		// TODO: Add validation
+		return _gameScoreRepository.CreateUserGameScore(userId, gameName);
 })
 .WithName("PostUserGameScore");
 
-app.MapPut("/usergamescore/{userId}",
+app.MapPut("/usergamescore",
 	[SwaggerOperation(Summary = "Updates user game score", Description = "Updates the current game score of the provided user and game.")]
-	(int userId) => {
-	return _gameScoreRepository.UpdateUserGameScore(new UserGameScoreRecord(userId, games[1], 1, 100));
+	(UserGameScoreRecord userGameScore) => {
+		// TODO: Add validation
+		return _gameScoreRepository.UpdateUserGameScore(userGameScore);
 })
 .WithName("UpdateGameScore");
 
-app.MapDelete("/usergamescore/{userId}",
+app.MapDelete("/usergamescore/{userId}/{gameName}/{attemptNumber}",
 	[SwaggerOperation(Summary = "Delete user game score", Description = "Deletes the game score of the provided user and game.")]
-	(int userId) => {
-	return _gameScoreRepository.DeleteUserGameScore(userId, games[1], 1);
+	(int userId, string gameName, int attemptNumber) => {
+		// TODO: Add validation
+		return _gameScoreRepository.DeleteUserGameScore(userId, gameName, attemptNumber);
 })
 .WithName("DeleteUserGameScore");
 

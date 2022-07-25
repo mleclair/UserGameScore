@@ -19,14 +19,14 @@ namespace GameScore.Repositories
 		bool CreateUserGameScore(int userId, string gameName);
 
 		/// <summary>
-		/// Updates and existing <see cref="UserGameScoreRecord"/>.
+		/// Updates an existing <see cref="UserGameScoreRecord"/>.
 		/// </summary>
 		/// <param name="userGameScore"></param>
 		/// <returns>True when update successful.</returns>
 		bool UpdateUserGameScore(UserGameScoreRecord userGameScore);
 
 		/// <summary>
-		/// Deletes and existing <see cref="UserGameScoreRecord"/>.
+		/// Deletes an existing <see cref="UserGameScoreRecord"/>.
 		/// </summary>
 		/// <param name="userId"></param>
 		/// <param name="gameName"></param>
